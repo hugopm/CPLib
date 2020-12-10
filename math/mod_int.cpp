@@ -29,7 +29,7 @@ struct mod_int
 		return a.x < b.x;
 	}
 
-	friend ostream& operator << (ostream& out, const mod_int& a) {
+	friend std::ostream& operator << (std::ostream& out, const mod_int& a) {
 		return out << a.x;
 	}
 

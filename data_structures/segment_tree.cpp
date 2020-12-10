@@ -1,33 +1,33 @@
 template<typename st_node>
 struct segment_tree {
 	int size = 0;
-	vector<st_node> arr;
+	std::vector<st_node> array;
 
-	segment_tree(vector<st_node> v) {
+	segment_tree(std::vector<st_node> v) {
 		size = v.size();
-		arr.resize(2*size);
-		for (int i = size; i < 2*size; ++i) {
-			arr[i] = v[i-size];
+		array.resize(2*size);
+		for (int idx = size; idx < 2*size; ++idx) {
+			array[idx] = v[idx-size];
 		}
-		for (int i = size-1; i >= 1; --i) {
-			arr[i] = st_node::comb(arr[2*i], arr[2*i+1]);
+		for (int idx = size-1; idx >= 1; --idx) {
+			array[idx] = st_node::op(array[2*idx], array[2*idx+1]);
 		}
 	}
 
 	segment_tree(int t, st_node x) :
-		segment_tree(vector<st_node>(t, x)) { }
+		segment_tree(std::vector<st_node>(t, x)) { }
 
-	void set(int pos, st_node val) {
-		pos += size;
-		arr[pos] = val;
-		while (pos > 1) {
-			pos /= 2;
-			arr[pos] = st_node::comb(arr[2*pos], arr[2*pos+1]);
+	void set(int idx, st_node val) {
+		idx += size;
+		array[idx] = val;
+		while (idx > 1) {
+			idx /= 2;
+			array[idx] = st_node::op(array[2*idx], array[2*idx+1]);
 		}
 	}
 
-	void refresh(int pos, st_node refr) {
-		upd(pos, arr[pos+size].comb(refr));
+	void refresh(int idx, st_node proposal) {
+		upd(idx, st_node::op(array[idx+size], proposal));
 	}
 
 	st_node query(int left, int right) {
@@ -36,10 +36,10 @@ struct segment_tree {
 		st_node res; 
 		while (left < right) {
 			if (left & 1) {
-				res = st_node::comb(res, arr[left++]);
+				res = st_node::op(res, array[left++]);
 			}
 			if (right & 1) {
-				res = st_node::comb(res, arr[--right]);
+				res = st_node::op(res, array[--right]);
 			}
 			left /= 2; right /= 2;	
 		}
