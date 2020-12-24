@@ -1,3 +1,7 @@
+#pragma once
+#include <vector>
+#include <numeric>
+
 struct union_find {
 	int size;
 	std::vector<int> leader, weight;

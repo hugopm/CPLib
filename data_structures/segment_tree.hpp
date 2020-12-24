@@ -1,3 +1,6 @@
+#pragma once
+#include <vector>
+
 template<class node, node (*op)(node, node), node (*id)()>
 struct segment_tree {
 	int size = 0;

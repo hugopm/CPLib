@@ -1,3 +1,6 @@
+#pragma once
+#include <iostream>
+
 template<const int MOD>
 struct mod_int
 {
@@ -50,7 +53,7 @@ struct mod_int
 	}
 
 	mod_int& operator*=(const mod_int& m) {
-		x = (1ll * x * m.x) % MOD;
+		x = (x * m.x) % MOD;
 		return *this;
 	}	
 
