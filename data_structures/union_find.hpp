@@ -6,7 +6,7 @@ struct union_find {
 	int size;
 	std::vector<int> leader, weight;
 
-	union_find(int ta) : size(ta), leader(ta), weight(ta, 1) {
+	union_find(int _n) : size(_n), leader(_n), weight(_n, 1) {
 		iota(leader.begin(), leader.end(), 0);
 	}
 
@@ -18,8 +18,7 @@ struct union_find {
 	}
 
 	bool merge(int a, int b) {
-		a = find(a);
-		b = find(b);
+		a = find(a), b = find(b);
 		if (a == b) {
 			return false;
 		}
