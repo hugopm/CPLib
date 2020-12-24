@@ -2,62 +2,71 @@
 #include <vector>
 
 template<class node, node (*op)(node, node), node (*e)()>
-struct segtree {
-	int log = 0, size = 0;
-	std::vector<node> arr;
-
-	segtree(std::vector<node> v) {
-		int _n = v.size();
-		log = 0;
+class segtree {
+public:
+	segtree(std::vector<node> v) : _n(v.size()), log(0) {
 		while ((1 << log) < _n) {
 			++log;
 		}
 
 		size = (1 << log);
-		arr.assign(2*size, e());
+		data.assign(2*size, e());
 
 		for (int i = 0; i < _n; ++i) {
-			arr[size+i] = v[i];
+			data[size+i] = v[i];
 		}
 
 		for (int i = size-1; i >= 1; --i) {
-			arr[i] = op(arr[2*i], arr[2*i+1]);
+			update(i);
 		}
 	}
 
 	segtree(int t = 0, node x = e()) : segtree(std::vector<node>(t, x)) { }
 
-	void set(int i, node val) {
-		i += size;
-		arr[i] = val;
-		while (i > 1) {
-			i /= 2;
-			arr[i] = op(arr[2*i], arr[2*i+1]);
+	node get(int pos) {
+		return data[size+pos];
+	}
+
+	void set(int pos, node val) {
+		pos += size;
+		data[pos] = val;
+		for (int h = 1; h <= log; ++h) {
+			update(pos >> h);
 		}
 	}
 
-	void refresh(int i, node proposal) {
-		set(i, op(arr[i+size], proposal));
+	void refresh(int pos, node proposal) {
+		set(pos, op(data[size+pos], proposal));
 	}
 
 	node query_semi_open(int left, int right) {
 		left += size;
 		right += size;
-		node res = e(); 
+		node res_left = e(), res_right = e(); 
+
 		while (left < right) {
 			if (left & 1) {
-				res = op(res, arr[left++]);
+				res_left = op(res_left, data[left++]);
 			}
 			if (right & 1) {
-				res = op(res, arr[--right]);
+				res_right = op(data[--right], res_right);
 			}
 			left >>= 1, right >>= 1;	
 		}
-		return res;
+
+		return op(res_left, res_right);
 	}
 
 	node query_all() {
-		return arr[1];
+		return data[1];
+	}
+
+private:
+	int _n, log, size;
+	std::vector<node> data;
+
+	void update(int k) {
+		data[k] = op(data[k<<1], data[k<<1|1]);
 	}
 };
 
