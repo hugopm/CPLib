@@ -2,8 +2,7 @@
 #include <iostream>
 
 template<const int MOD>
-struct mod_int
-{
+struct mod_int {
 	long long x;
 	mod_int() : x(0) { }
 	mod_int(long long u) : x(u) {
