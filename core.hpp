@@ -23,9 +23,14 @@ int len(const T &x) {
     return (int)(x.size());
 }
 
-// DEBUG
-void dbg_out() { cout << endl; }
-template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) { cout << ' ' << H; dbg_out(T...); }
+void dbg_out() {
+	cout << endl;
+}
+template<typename Head, typename... Tail>
+void dbg_out(Head H, Tail... T) {
+	cout << ' ' << H; dbg_out(T...);
+}
+
 #ifdef DEBUG
 #define dbg(...) cout << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
 #else
@@ -33,16 +38,19 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) { cout
 #endif
 
 template<typename Ostream, typename Cont>
-typename enable_if<is_same<Ostream,ostream>::value, Ostream&>::type operator<<(Ostream& os,  const Cont& v){
-	os<<"[";
-	for(auto& x:v){os<<x<<", ";}
-	return os<<"]";
+typename enable_if<is_same<Ostream,ostream>::value, Ostream&>::type
+operator<<(Ostream& os,  const Cont& v){
+	os << "[";
+	for (auto &x : v) {
+		os << x << ", ";
+	}
+	return os << "]";
 }
+
 template<typename Ostream, typename ...Ts>
-Ostream& operator<<(Ostream& os,  const pair<Ts...>& p){
-	return os<<"{"<<p.first<<", "<<p.second<<"}";
+Ostream& operator<<(Ostream& os,  const pair<Ts...>& p) {
+	return os << "{" << p.first << ", " << p.second << "}";
 }
-// END DEBUG
 
 template<int D, typename T>
 struct Vec : public vector<Vec<D - 1, T>> {
@@ -50,6 +58,7 @@ struct Vec : public vector<Vec<D - 1, T>> {
 	template<typename... Args>
 	Vec(int n, Args... args) : vector<Vec<D - 1, T>>(n, Vec<D - 1, T>(args...)) {}
 };
+
 template<typename T>
 struct Vec<1, T> : public vector<T> {
 	Vec(int n, const T& val = T()) : vector<T>(n, val) {}
@@ -71,4 +80,22 @@ class letrec_result {
 template<class Fun>
 decltype(auto) letrec(Fun &&fun) {
 	return letrec_result<std::decay_t<Fun>>(std::forward<Fun>(fun));
+}
+
+ll nxt() {
+	ll x;
+	cin >> x;
+	return x;
+}
+
+vector<int> vec32(int n) {
+	vector<int> v(n);
+	for (int &x : v) cin >> x;
+	return v;
+}
+
+vector<ll> vec64(int n) {
+	vector<ll> v(n);
+	for (ll &x : v) cin >> x;
+	return v;
 }
