@@ -10,21 +10,21 @@ const int m998 = 998244353;
 
 template<typename T>
 void chmax(T &x, const T &v) {
-    if (x < v) {
+	if (x < v) {
 		x = v;
 	}
 }
 
 template<typename T>
 void chmin(T &x, const T &v) {
-    if (x > v) {
+	if (x > v) {
 		x = v;
 	}
 }
 
 template<typename T>
 int len(const T &x) {
-    return (int)(x.size());
+	return (int)(x.size());
 }
 
 void dbg_out() {
@@ -61,7 +61,7 @@ template<int D, typename T>
 struct Vec : public vector<Vec<D - 1, T>> {
 	static_assert(D >= 1, "Vector dimension must be greater than zero!");
 	template<typename... Args>
-	Vec(int n, Args... args) : vector<Vec<D - 1, T>>(n, Vec<D - 1, T>(args...)) {}
+		Vec(int n, Args... args) : vector<Vec<D - 1, T>>(n, Vec<D - 1, T>(args...)) {}
 };
 
 template<typename T>
@@ -72,16 +72,16 @@ struct Vec<1, T> : public vector<T> {
 template<class Fun>
 class letrec_result {
 	Fun fun_;
-	public:
+public:
 	template<class T>
-	explicit letrec_result(T &&fun): fun_(std::forward<T>(fun)) {}
- 
+		explicit letrec_result(T &&fun): fun_(std::forward<T>(fun)) {}
+
 	template<class ...Args>
-	decltype(auto) operator()(Args &&...args) {
-		return fun_(ref(*this), std::forward<Args>(args)...);
-	}
+		decltype(auto) operator()(Args &&...args) {
+			return fun_(ref(*this), std::forward<Args>(args)...);
+		}
 };
- 
+
 template<class Fun>
 decltype(auto) letrec(Fun &&fun) {
 	return letrec_result<std::decay_t<Fun>>(std::forward<Fun>(fun));
