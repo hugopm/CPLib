@@ -5,6 +5,8 @@
 #define rep(i, a, b) for(int i = (a); i < (b); i++)
 using namespace std;
 using ll = long long;
+const int m197 = 1000000007;
+const int m998 = 998244353;
 
 template<typename T>
 void chmax(T &x, const T &v) {
@@ -29,6 +31,17 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) { cout
 #else
 #define dbg(...)
 #endif
+
+template<typename Ostream, typename Cont>
+typename enable_if<is_same<Ostream,ostream>::value, Ostream&>::type operator<<(Ostream& os,  const Cont& v){
+	os<<"[";
+	for(auto& x:v){os<<x<<", ";}
+	return os<<"]";
+}
+template<typename Ostream, typename ...Ts>
+Ostream& operator<<(Ostream& os,  const pair<Ts...>& p){
+	return os<<"{"<<p.first<<", "<<p.second<<"}";
+}
 // END DEBUG
 
 template<int D, typename T>
