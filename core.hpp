@@ -1,7 +1,7 @@
 #pragma once
 #include <bits/stdc++.h>
 #define all(v) (v).begin(), (v).end()
-#define revall(v) (v).rbegin(), (v).rend()
+#define rall(v) (v).rbegin(), (v).rend()
 #define rep(i, a, b) for(int i = (a); i < (b); i++)
 using namespace std;
 using ll = long long;
@@ -10,12 +10,16 @@ const int m998 = 998244353;
 
 template<typename T>
 void chmax(T &x, const T &v) {
-    if (x < v) x = v;
+    if (x < v) {
+		x = v;
+	}
 }
 
 template<typename T>
 void chmin(T &x, const T &v) {
-    if (x > v) x = v;
+    if (x > v) {
+		x = v;
+	}
 }
 
 template<typename T>
@@ -28,7 +32,8 @@ void dbg_out() {
 }
 template<typename Head, typename... Tail>
 void dbg_out(Head H, Tail... T) {
-	cout << ' ' << H; dbg_out(T...);
+	cout << ' ' << H;
+	dbg_out(T...);
 }
 
 #ifdef DEBUG
@@ -69,12 +74,12 @@ class letrec_result {
 	Fun fun_;
 	public:
 	template<class T>
-		explicit letrec_result(T &&fun): fun_(std::forward<T>(fun)) {}
+	explicit letrec_result(T &&fun): fun_(std::forward<T>(fun)) {}
  
 	template<class ...Args>
-		decltype(auto) operator()(Args &&...args) {
-			return fun_(ref(*this), std::forward<Args>(args)...);
-		}
+	decltype(auto) operator()(Args &&...args) {
+		return fun_(ref(*this), std::forward<Args>(args)...);
+	}
 };
  
 template<class Fun>
@@ -90,12 +95,16 @@ ll nxt() {
 
 vector<int> vec32(int n) {
 	vector<int> v(n);
-	for (int &x : v) cin >> x;
+	for (int &x : v) {
+		cin >> x;
+	}
 	return v;
 }
 
 vector<ll> vec64(int n) {
 	vector<ll> v(n);
-	for (ll &x : v) cin >> x;
+	for (ll &x : v) {
+		cin >> x;
+	}
 	return v;
 }
