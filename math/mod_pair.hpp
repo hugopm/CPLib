@@ -62,5 +62,15 @@ struct mod_pair {
 	mod_pair inv() {
 		return mod_pair(x1.inv(), x2.inv());
 	}
+
+	std::vector<mod_pair> all_pow(int k) {
+		auto a1 = x1.all_pow(k);
+		auto a2 = x2.all_pow(k);
+		std::vector<mod_pair> res(k+1);
+		for (int i = 0; i <= k; ++i) {
+			res[i] = mod_pair(a1[i], a2[i]);
+		}
+		return res;
+	}
 };
 

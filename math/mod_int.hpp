@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 template<const int MOD>
 struct mod_int {
@@ -103,5 +104,13 @@ struct mod_int {
 		return ((k & 1) ? mod_int(MOD - 1) : mod_int(1));
 	}
 
+	std::vector<mod_int> all_pow(int k) {
+		std::vector<mod_int> res(k+1);
+		res[0].x = 1;
+		for (int i = 1; i <= k; ++i) {
+			res[i].x = (res[i-1].x * x) % MOD;
+		}
+		return res;
+	}
 };
 
