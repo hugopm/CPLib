@@ -77,7 +77,7 @@ public:
 		update_anc(leaf);
 	}
 
-	void apply(int left, int right, fun fct) {
+	void apply_semi_open(int left, int right, fun fct) {
 		left += size;
 		right += size;
 
