@@ -114,11 +114,8 @@ private:
 		data[k] = op(data[k << 1], data[k << 1 | 1]);
 	}
 
-	void update_anc(int leaf, int dev = 0) {
-		int s = 1;
-		if (dev) {
-			s += __builtin_ctz(dev);
-		}
+	void update_anc(int leaf, int dev = 1) {
+		int s = 1 + __builtin_ctz(dev);
 		for (int i = s; i <= log; ++i) {
 			update_one(leaf >> i);
 		}
@@ -137,11 +134,8 @@ private:
 		lazy[k] = id();
 	}
 
-	void push_anc(int leaf, int dev = 0) {
-		int s = 1;
-		if (dev) {
-			s += __builtin_ctz(dev);
-		}
+	void push_anc(int leaf, int dev = 1) {
+		int s = 1 + __builtin_ctz(dev);
 		for (int i = log; i >= s; --i) {
 			push_one(leaf >> i);
 		}
