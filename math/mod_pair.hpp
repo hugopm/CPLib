@@ -73,4 +73,3 @@ struct mod_pair {
 		return res;
 	}
 };
-

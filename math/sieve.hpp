@@ -30,4 +30,3 @@ public:
 private:
 	std::vector<int> small_div;
 };
-

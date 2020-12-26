@@ -2,8 +2,9 @@
 #include <iostream>
 #include <vector>
 
-template<const int MOD>
+template<int MOD_>
 struct mod_int {
+	static constexpr int MOD = MOD_;
 	long long x;
 	mod_int() : x(0) { }
 	mod_int(long long u) : x(u) {
@@ -113,4 +114,3 @@ struct mod_int {
 		return res;
 	}
 };
-

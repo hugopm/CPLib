@@ -35,4 +35,3 @@ public:
 private:
 	std::vector<int> leader, weight;
 };
-

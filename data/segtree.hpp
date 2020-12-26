@@ -69,4 +69,3 @@ private:
 		data[k] = op(data[k<<1], data[k<<1|1]);
 	}
 };
-
