@@ -5,7 +5,7 @@
 template<int MOD_>
 struct mod_int {
 	static constexpr int MOD = MOD_;
-	long long x;
+	int x;
 	mod_int() : x(0) { }
 	mod_int(long long u) : x(u) {
 		if (x >= MOD || x < 0) {
@@ -37,6 +37,13 @@ struct mod_int {
 		return out << a.x;
 	}
 
+	friend std::istream& operator >> (std::istream& in, mod_int& a) {
+		long long x_;
+		in >> x_;
+		a = mod_int(x_);
+		return in;
+	}
+
 	mod_int& operator+=(const mod_int& m) {
 		x += m.x;
 		if (x >= MOD) {
@@ -54,7 +61,7 @@ struct mod_int {
 	}
 
 	mod_int& operator*=(const mod_int& m) {
-		x = (x * m.x) % MOD;
+		x = int((long long)(x) * (long long)(m.x) % MOD);
 		return *this;
 	}	
 
