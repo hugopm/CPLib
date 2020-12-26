@@ -30,8 +30,8 @@ public:
 	void set(int pos, node val) {
 		pos += size;
 		data[pos] = val;
-		for (int h = 1; h <= log; ++h) {
-			update(pos >> h);
+		for (int i = 1; i <= log; ++i) {
+			update(pos >> i);
 		}
 	}
 
