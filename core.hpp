@@ -116,7 +116,7 @@ vector<T> read_vector(int n) {
 }
 
 template<typename T>
-void print_vector(vector<T> data, bool new_line, bool print_size) {
+void print_vector(vector<T> data, bool print_size, bool new_line) {
 	int n = data.size();
 	if (print_size) {
 		cout << n << '\n';
