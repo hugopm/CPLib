@@ -29,7 +29,7 @@ public:
 			leader[b] = a;
 			weight[a] += weight[b];
 		}
-		return a == b;
+		return a != b;
 	}
 
 private:
