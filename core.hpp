@@ -115,6 +115,9 @@ vector<T> read_vector(int n) {
 	return v;
 }
 
+vector<int> rv32(int n) { return read_vector<int>(n); }
+vector<ll> rv64(int n) { return read_vector<ll>(n); }
+
 template<typename T>
 void print_vector(vector<T> data, bool print_size, bool new_line) {
 	int n = data.size();
