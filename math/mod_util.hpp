@@ -13,8 +13,8 @@ public:
 		fact[0].x = inv_fact[0].x = 1;
 		inv_raw[1].x = fact[1].x = inv_fact[1].x = 1;
 		for (int i = 2; i <= n; ++i) {
-			inv_raw[i].x = MOD - (MOD/i) * inv_raw[MOD%i].x % MOD;
-			fact[i] = fact[i-1].x * i;
+			inv_raw[i].x = MOD - 1ll * (MOD/i) * inv_raw[MOD%i].x % MOD;
+			fact[i] = fact[i-1] * i;
 			inv_fact[i] = inv_fact[i-1] * inv_raw[i];
 		}
 	}
