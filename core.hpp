@@ -2,9 +2,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Utilities
-
 using ll = long long;
+using v32 = vector<int>;
+using v64 = vector<ll>;
+template<typename T>
+using minpq = priority_queue<T, vector<T>, greater<T>>;
 const int m197 = 1000000007;
 const int m998 = 998244353;
 
@@ -13,30 +15,13 @@ const int m998 = 998244353;
 #define rep(i, a, b) for(int i = (a); i < (b); i++)
 
 template<typename T>
-void chmax(T &x, const T &v) {
-	if (x < v) {
-		x = v;
-	}
-}
-
+void chmax(T &x, const T &v) { if (x < v) x = v; }
 template<typename T>
-void chmin(T &x, const T &v) {
-	if (x > v) {
-		x = v;
-	}
-}
-
+void chmin(T &x, const T &v) { if (x > v) x = v; }
 template<typename T>
-int len(const T &x) {
-	return (int)(x.size());
-}
+int len(const T &x) { return (int)(x.size()); }
 
-// Debug
-
-void dbg_out() {
-	cout << endl;
-}
-
+void dbg_out() { cout << endl; }
 template<typename Head, typename... Tail>
 void dbg_out(Head H, Tail... T) {
 	cout << ' ' << H;
@@ -53,9 +38,7 @@ template<typename Ostream, typename Cont>
 typename enable_if<is_same<Ostream,ostream>::value, Ostream&>::type
 operator<<(Ostream& os,  const Cont& v){
 	os << "[";
-	for (auto &x : v) {
-		os << x << ", ";
-	}
+	for (auto &x : v) os << x << ", ";
 	return os << "]";
 }
 
@@ -63,8 +46,6 @@ template<typename Ostream, typename ...Ts>
 Ostream& operator<<(Ostream& os,  const pair<Ts...>& p) {
 	return os << "{" << p.first << ", " << p.second << "}";
 }
-
-// Multi-dimensional vector
 
 template<int D, typename T>
 struct Vec : public vector<Vec<D - 1, T>> {
@@ -77,8 +58,6 @@ template<typename T>
 struct Vec<1, T> : public vector<T> {
 	Vec(int n, const T& val = T()) : vector<T>(n, val) {}
 };
-
-// Recursive lambda
 
 template<class Fun>
 class letrec_result {
@@ -98,33 +77,19 @@ decltype(auto) letrec(Fun &&fun) {
 	return letrec_result<std::decay_t<Fun>>(std::forward<Fun>(fun));
 }
 
-// Input / Output
-
-ll nxt() {
-	ll x;
-	cin >> x;
-	return x;
-}
-
+ll nxt() { ll x; cin >> x; return x; }
 template<typename T>
 vector<T> read_vector(int n) {
 	vector<T> v(n);
-	for (T &x : v) {
-		cin >> x;
-	}
+	for (T &x : v) cin >> x;
 	return v;
 }
-
 vector<int> rv32(int n) { return read_vector<int>(n); }
 vector<ll> rv64(int n) { return read_vector<ll>(n); }
 
 template<typename T>
 void print_vector(vector<T> data, bool print_size, bool new_line) {
 	int n = data.size();
-	if (print_size) {
-		cout << n << '\n';
-	}
-	for (int i = 0; i < n; ++i) {
-		cout << data[i] << " \n"[i+1 == n || new_line];
-	}
+	if (print_size) cout << n << '\n';
+	for (int i = 0; i < n; ++i) cout << data[i] << " \n"[i+1 == n || new_line];
 }
