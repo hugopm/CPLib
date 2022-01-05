@@ -93,3 +93,13 @@ void print_vector(vector<T> data, bool print_size, bool new_line) {
 	if (print_size) cout << n << '\n';
 	for (int i = 0; i < n; ++i) cout << data[i] << " \n"[i+1 == n || new_line];
 }
+
+void fastio() {
+	ios::sync_with_stdio(false), cin.tie(0);
+}
+
+vector<int> az_to_int(string s) {
+	vector<int> ret(s.size());
+	rep(i, 0, (int)s.size()) ret[i] = s[i] - 'a';
+	return ret;
+}
