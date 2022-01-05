@@ -7,13 +7,14 @@ struct mod_int {
 	static constexpr int MOD = MOD_;
 	int x;
 	mod_int() : x(0) { }
-	mod_int(long long u) : x(u) {
-		if (x >= MOD || x < 0) {
-			x %= MOD;
-			if (x < 0) {
-				x += MOD;
+	mod_int(long long u) {
+		if (u >= MOD || u < 0) {
+			u %= MOD;
+			if (u < 0) {
+				u += MOD;
 			}
 		}
+		x = u;
 	}
 	mod_int(const mod_int &m) : x(m.x) { }
 	mod_int& operator=(const mod_int &m) {
@@ -116,7 +117,7 @@ struct mod_int {
 		std::vector<mod_int> res(k+1);
 		res[0].x = 1;
 		for (int i = 1; i <= k; ++i) {
-			res[i].x = (res[i-1].x * x) % MOD;
+			res[i].x = (1ll * res[i-1].x * x) % MOD;
 		}
 		return res;
 	}
